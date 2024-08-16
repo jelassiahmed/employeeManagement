@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="mt-4">Employee List</h2>
+      <button mat-raised-button color="primary" (click)="openAddEmployeeDialog()">Add Employee</button>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText" />
+        <label for="pageSize">Items per page:</label>
+        <select #pageSizeSelect id="pageSize" class="form-select" [(ngModel)]="pageSize" (change)="onPageSizeChange(pageSizeSelect)">
+          <option *ngFor="let size of pageSizeOptions" [value]="size">{{ size }}</option>
+        </select>
+
+    </div>
+
+  </div>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered table-striped">
+            <thead class="thead-light">
+            <tr>
+              <th (click)="sort('id')">ID</th>
+              <th (click)="sort('firstName')">First Name</th>
+              <th (click)="sort('lastName')">Last Name</th>
+              <th (click)="sort('age')">Age</th>
+              <th (click)="sort('dob')">Date of Birth</th>
+              <th (click)="sort('email')">Email</th>
+              <th (click)="sort('salary')">Salary</th>
+              <th (click)="sort('address')">Address</th>
+              <th>Image</th>
+              <th (click)="sort('contactNumber')">Contact Number</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let employee of employees | paginate: { itemsPerPage: pageSize, currentPage: currentPage } | filter: searchText; let i = index">
+              <td class="text-truncate">{{ employee.id }}</td>
+              <td class="text-truncate">{{ employee.firstName }}</td>
+              <td class="text-truncate">{{ employee.lastName }}</td>
+              <td class="text-truncate">{{ employee.age }}</td>
+              <td class="text-truncate">{{ employee.dob }}</td>
+              <td class="text-truncate">{{ employee.email }}</td>
+              <td class="text-truncate">{{ employee.salary }}</td>
+              <td class="text-truncate">{{ employee.address }}</td>
+              <td><img [src]="employee.imageUrl" alt="Employee Image" class="img-thumbnail" style="max-width: 100px;"></td>
+              <td class="text-truncate">{{ employee.contactNumber }}</td>
+              <td>
+                <button class="btn btn-danger btn-sm" (click)="deleteEmployee(i)">Delete</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <pagination-controls class="d-flex justify-content-center" (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Add New Employee</h1>
+<div mat-dialog-content>
+  <form (ngSubmit)="onAdd()" #employeeForm="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput [(ngModel)]="newEmployee.firstName" name="firstName" required />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput [(ngModel)]="newEmployee.lastName" name="lastName" required />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Date of Birth</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="newEmployee.dob" name="dob" required />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" [(ngModel)]="newEmployee.email" name="email" required />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Salary</mat-label>
+      <input matInput type="number" [(ngModel)]="newEmployee.salary" name="salary" required />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Address</mat-label>
+      <input matInput [(ngModel)]="newEmployee.address" name="address" required />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Image URL</mat-label>
+      <input matInput [(ngModel)]="newEmployee.imageUrl" name="imageUrl" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Contact Number</mat-label>
+      <input matInput [(ngModel)]="newEmployee.contactNumber" name="contactNumber" />
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button mat-raised-button color="primary" type="submit">Add Employee</button>
+      <button mat-button (click)="dialogRef.close()">Cancel</button>
+    </div>
+  </form>
+</div>
